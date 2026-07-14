@@ -21,6 +21,7 @@
   </style>
 
   <script>
+    const deployment = "dev-animals";
     const title = document.title;
     const manifest = {
       name: title,
@@ -38,13 +39,6 @@
     const url = URL.createObjectURL(blob);
     document.querySelector('link[rel="manifest"]').setAttribute('href', url);
 
-    // Extract filename → "whipsnade.html"
-    const filename = window.location.pathname.split("/").pop();
-
-    // Remove .html → "whipsnade"
-    const deployment = filename.replace(".html", "");
-
-    // Load deployments map
     fetch("deployments.json")
       .then(r => r.json())
       .then(map => {
