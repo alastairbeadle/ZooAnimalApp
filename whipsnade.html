@@ -19,8 +19,22 @@
       border: none;
     }
   </style>
+
+  <script>
+    // Calculate deployment name from filename
+    const deployment = window.location.pathname.split("/").pop().replace(".html", "");
+
+    // Load the deployments map
+    fetch("deployments.json")
+      .then(r => r.json())
+      .then(map => {
+        const url = map[deployment];
+        document.getElementById("app").src = url;
+      });
+  </script>
 </head>
+
 <body>
-  <iframe src="https://script.google.com/macros/s/AKfycbwnKR2hfltjmzNO9meqUFwEkpGOvj0FLnTXJREeX6WjnJdinTl4Y7jaspQp6doxglxw/exec"></iframe>
+  <iframe id="app"></iframe>
 </body>
 </html>
